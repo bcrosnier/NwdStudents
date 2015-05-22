@@ -1,19 +1,58 @@
 ﻿@using Nwd.FrontOffice
 @model AlbumViewModel
+
+@section scripts {
+    <script type="text/javascript">
+        (function () {
+            'use strict';
+            var $ = window.jQuery;
+            if (!$) { throw new Error('jQuery is required.'); }
+
+            var nwd = nwd || {};
+
+            nwd.miniPlayerUrl = '@Url.Action( "MiniPlayer" )';
+
+            nwd.audioElm = $('#albumPlayer')[0];
+            nwd.getMiniPlayerFor = function (albumId, trackId) {
+                return $.ajax(nwd.miniPlayerUrl, {
+                    data: {
+                        albumId: albumId,
+                        trackId: trackId
+                    }
+                });
+            };
+
+            nwd.changeTrackUrl = function (newUrl) {
+                $(nwd.audioElm).attr('src', newUrl);
+                console.log('Playing:', newUrl);
+                nwd.audioElm.play();
+            };
+
+            window.nwd = nwd;
+        }())
+
+    </script>
+}
+
 <h1>Album: @Model.AlbumName</h1>
 <h2>Coucou je suis l'album @Model.AlbumName</h2>
 
+<img class="cover-image" src="@Model.CoverImageUrl" />
+
+<div class="album-player">
+    <audio id="albumPlayer" controls></audio>
+</div>
+
 <h2>@Model.Tracks.Count tracks:</h2>
+
 <div class="tracks-container">
     @foreach( var tvm in @Model.Tracks )
     {
         <div class="track-item">
-            <a href="@tvm.SongUrl">
-                <span class="track-number"> @tvm.TrackNumber .</span>
+            <a onclick="window.nwd.changeTrackUrl( '@tvm.SongUrl' );" href="#">
+                <span class="track-number"> @tvm.TrackNumber.</span>
                 <span class="track-title">@tvm.SongName</span>
             </a>
         </div>
     }
 </div>
-
-<img class="cover-image" src="@Model.CoverImageUrl" />

@@ -27,8 +27,27 @@ namespace Nwd.Web.Controllers
         public ActionResult Album( int id )
         {
             var a = GetAlbumViewModel( id );
+            if( a == null )
+            {
+                return new HttpNotFoundResult();
+            }
+            else
+            {
+                return View( a );
+            }
+        }
 
-            return View( a );
+        public ActionResult MiniPlayer( int albumId, int trackId )
+        {
+            var p = _musicReader.GetMiniPlayerFor( albumId, trackId );
+            if( p == null )
+            {
+                return new HttpNotFoundResult();
+            }
+            else
+            {
+                return Json( p );
+            }
         }
 
         private AlbumViewModel GetAlbumViewModel( int albumId )
