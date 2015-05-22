@@ -1,0 +1,19 @@
+﻿@using Nwd.FrontOffice
+@model AlbumViewModel
+<h1>Album: @Model.AlbumName</h1>
+<h2>Coucou je suis l'album @Model.AlbumName</h2>
+
+<h2>@Model.Tracks.Count tracks:</h2>
+<div class="tracks-container">
+    @foreach( var tvm in @Model.Tracks )
+    {
+        <div class="track-item">
+            <a href="@tvm.SongUrl">
+                <span class="track-number"> @tvm.TrackNumber .</span>
+                <span class="track-title">@tvm.SongName</span>
+            </a>
+        </div>
+    }
+</div>
+
+<img class="cover-image" src="@Model.CoverImageUrl" />
