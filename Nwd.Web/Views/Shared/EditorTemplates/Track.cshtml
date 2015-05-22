@@ -36,10 +36,10 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.FileRelativePath, htmlAttributes: new {@class = "control-label col-md-2"})
+        @Html.LabelFor( model => model.File, htmlAttributes: new { @class = "control-label col-md-2" } )
         <div class="col-md-10">
-            @Html.EditorFor(model => model.FileRelativePath, new {htmlAttributes = new {@class = "form-control"}})
-            @Html.ValidationMessageFor(model => model.FileRelativePath, "", new {@class = "text-danger"})
+             @Html.TextBoxFor( m => m.File, new { type = "file", name = "Files", @class = "form-control" } )
+            @Html.ValidationMessageFor(model => model.File, "", new {@class = "text-danger"})
         </div>
     </div>
 
@@ -50,6 +50,6 @@
             @Html.ValidationMessageFor(model => model.Song_Id, "", new {@class = "text-danger"})
         </div>
     </div>
+    @Html.EditorFor( model => model.Song )
 
-    @{ Html.RenderPartial("EditorTemplates/Song", Model.Song); }
 </div>
