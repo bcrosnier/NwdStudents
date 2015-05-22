@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Nwd.BackOffice.Model;
+
+namespace Nwd.Web.Areas.Admin.Controllers
+{
+    [Authorize]
+    public class AlbumController : Controller
+    {
+        // GET: Admin/Album
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult List()
+        {
+            return View( new List<Album>());
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create( Album album )
+        {
+            return new HttpStatusCodeResult(200);
+        }
+    }
+}
