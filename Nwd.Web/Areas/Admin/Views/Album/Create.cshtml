@@ -1,0 +1,12 @@
+﻿@model Nwd.Web.Areas.Admin.AlbumViewModel
+
+@{
+    ViewBag.Title = "Formulaire de création d'album";
+}
+
+Coucou je suis le formulaire de création d'album
+
+@using( Html.BeginForm( "Create", "Album" ) )
+{
+    @Html.EditorForModel();
+}
