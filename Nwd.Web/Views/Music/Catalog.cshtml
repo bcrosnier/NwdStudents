@@ -1,0 +1,17 @@
+﻿@using Nwd.FrontOffice.ViewModels
+@model Catalog
+<h1>Album catalog</h1>
+<h2>Coucou je suis le catalogue des albums</h2>
+
+<h2>@Model.NumberOfAlbum albums.</h2>
+<div class="catalog-container">
+    @foreach( AlbumThumbnailViewModel a in @Model.Albums )
+    {
+        <div class="catalog-item">
+            <a href="@Url.Action( "Album", new { id = @a.AlbumId } )"><img src="@a.CoverImageUrl" /></a>
+            <p class="album-name"><a href="@Url.Action( "Album", new { id = @a.AlbumId } )">@a.AlbumName</a></p>
+            <p class="artist-name">@a.ArtistName</p>
+            <p class="tracks-count">@a.TracksCount tracks</p>
+        </div>
+    }
+</div>
