@@ -1,20 +1,17 @@
 ﻿@using Nwd.BackOffice.Model
-@model Album
+@model Nwd.BackOffice.Model.Album
 
-
-@using (Html.BeginForm()) 
-{
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>AlbumViewModel</h4>
+        <h4>Album</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -43,25 +40,25 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor( model => model.CoverImagePath, htmlAttributes: new { @class = "control-label col-md-2" } )
+            @Html.LabelFor( model => model.CoverFile, htmlAttributes: new { @class = "control-label col-md-2" } )
             <div class="col-md-10">
-                @Html.EditorFor( model => model.CoverImagePath, new { htmlAttributes = new { @class = "form-control" } } )
-                @Html.ValidationMessageFor( model => model.CoverImagePath, "", new { @class = "text-danger" } )
+                @Html.TextBoxFor( m => m.CoverFile, new { type = "file", name = "Files", @class = "form-control" } )
+                @Html.ValidationMessageFor(model => model.CoverFile, "", new {@class = "text-danger"})
             </div>
         </div>
-
+        @Html.HiddenFor( model => model.Artist_Id )
         <div class="form-group">
-            @Html.LabelFor(model => model.Artist, htmlAttributes: new {@class = "control-label col-md-2"})
+            @Html.LabelFor(model => model.ArtistName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Artist, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Artist, "", new {@class = "text-danger"})
+                @Html.EditorFor( model => model.ArtistName, new { htmlAttributes = new { @class = "form-control" } } )
+                @Html.ValidationMessageFor( model => model.ArtistName, "", new { @class = "text-danger" } )
             </div>
         </div>
         <ul class="track-list-form">
             @foreach( Track item in @Model.Tracks )
             {
                 <li>
-                        @Html.EditorFor( _ => item, null, "" )
+                    @Html.EditorFor( _ => item, null, "" )
                 </li>
             }
         </ul>
@@ -73,9 +70,3 @@
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-

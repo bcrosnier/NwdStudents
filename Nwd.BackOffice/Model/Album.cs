@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace Nwd.BackOffice.Model
 {
     using System;
@@ -20,13 +23,28 @@ namespace Nwd.BackOffice.Model
             this.Tracks = new HashSet<Track>();
         }
     
+        [HiddenInput]
         public int Id { get; set; }
+
         [Remote("IsAlbumTitleAvailable", "Album")]
+        [Required]
         public string Title { get; set; }
+
+        [Required]
+        [DataType(DataType.Duration)]
         public System.TimeSpan Duration { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
         public System.DateTime ReleaseDate { get; set; }
+
+        [Required]
         public string Type { get; set; }
+
+        [HiddenInput]
         public string CoverImagePath { get; set; }
+
+        [HiddenInput]
         public Nullable<int> Artist_Id { get; set; }
     
         public virtual Artist Artist { get; set; }
