@@ -162,6 +162,7 @@
     <Compile Include="Areas\Admin\Controllers\AlbumController.cs" />
     <Compile Include="Areas\Admin\Models\AlbumViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MusicController.cs" />
@@ -238,6 +239,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Music\Catalog.cshtml" />
     <Content Include="Views\Music\Album.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\InternalServerError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

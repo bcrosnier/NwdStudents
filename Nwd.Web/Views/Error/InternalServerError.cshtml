@@ -1,0 +1,12 @@
+﻿@model Exception
+
+<h1>He's dead, Jim.</h1>
+<p>Something went awfully wrong on our side. <strong>SHITSHITSHITSHITSHITSHITSHIT</strong></p>
+<p>Go back and try again, or try something else.</p>
+
+@if( Model != null )
+{
+<pre>
+@Model.ToString();
+</pre>
+}

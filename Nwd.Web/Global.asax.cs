@@ -16,6 +16,19 @@ namespace Nwd.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+        }
+
+        protected void Application_Error( object sender, EventArgs e )
+        {
+#if DEBUG
+            // Handle errors on ExecuteURL redirection
+            Exception ex = HttpContext.Current.Server.GetLastError();
+            if( ex != null )
+            {
+                HttpContext.Current.Cache["LastError"] = ex;
+            }
+#endif
         }
     }
 }
