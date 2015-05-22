@@ -17,7 +17,7 @@ namespace Nwd.Web.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Album", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

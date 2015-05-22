@@ -11,15 +11,52 @@ namespace Nwd.Web.Areas.Admin.Controllers
     [Authorize]
     public class AlbumController : Controller
     {
-        // GET: Admin/Album
-        public ActionResult Index()
+        AlbumRepository _repo;
+
+        public AlbumController()
         {
-            return View();
+            _repo = new AlbumRepository();
         }
 
-        public ActionResult List()
+        public ActionResult Index()
         {
-            return View( new List<Album>() );
+            var albums = _repo.GetAllAlbums();
+
+            return View( albums );
+        }
+
+        [HttpGet]
+        public ActionResult Edit( int id )
+        {
+            var a = _repo.GetAlbumForEdit( id );
+            if( a == null )
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View( a );
+            }
+        }
+
+        public ActionResult IsAlbumTitleAvailable( string title )
+        {
+            if( !_repo.AlbumExists( title ) )
+                return Json( true, JsonRequestBehavior.AllowGet );
+
+            return Json( false, JsonRequestBehavior.AllowGet );
+        }
+
+        [HttpPost]
+        public ActionResult Edit( Album model )
+        {
+            if( ModelState.IsValid )
+            {
+                _repo.EditAlbum( Server, model );
+                return Edit( model.Id );
+            }
+
+            return View( model );
         }
 
         [HttpGet]
@@ -31,8 +68,7 @@ namespace Nwd.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create( Album album )
         {
-            var repo = new AlbumRepository();
-            repo.CreateAlbum( album, Server );
+            _repo.CreateAlbum( album, Server );
             return new HttpStatusCodeResult( 200 );
         }
 

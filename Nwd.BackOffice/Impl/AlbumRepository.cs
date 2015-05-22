@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data.Entity;
 using System.IO;
+using System.Linq;
 using System.Web;
-using Nwd.BackOffice.Model;
+using Nwd.BackOffice.Model; 
 
 namespace Nwd.BackOffice.Impl
 {
@@ -14,6 +14,8 @@ namespace Nwd.BackOffice.Impl
         {
             using( var ctx = new NwdMusikEntities() )
             {
+                var albums = ctx.Albums.Include( e => e.Artist ).ToList();
+                
                 return ctx.Albums.ToList();
             }
         }
@@ -31,7 +33,18 @@ namespace Nwd.BackOffice.Impl
             }
             using( var ctx = new NwdMusikEntities() )
             {
-                return ctx.Albums.Where( a => a.Id != album.Id  ).Any( a => a.Title == album.Title );
+                return ctx.Albums.Where( a => a.Id != album.Id ).Any( a => a.Title == album.Title );
+            }
+        }
+        public bool AlbumExists( string albumTitle )
+        {
+            if( albumTitle == null )
+            {
+                throw new ArgumentNullException( "albumTitle" );
+            }
+            using( var ctx = new NwdMusikEntities() )
+            {
+                return ctx.Albums.Any( a => a.Title == albumTitle );
             }
         }
 

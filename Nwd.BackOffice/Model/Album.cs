@@ -11,6 +11,7 @@ namespace Nwd.BackOffice.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Web.Mvc;
     
     public partial class Album
     {
@@ -20,6 +21,7 @@ namespace Nwd.BackOffice.Model
         }
     
         public int Id { get; set; }
+        [Remote("IsAlbumTitleAvailable", "Album")]
         public string Title { get; set; }
         public System.TimeSpan Duration { get; set; }
         public System.DateTime ReleaseDate { get; set; }
