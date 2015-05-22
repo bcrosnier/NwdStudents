@@ -24,11 +24,35 @@ namespace Nwd.Web.Controllers
             return View( c );
         }
 
-        public ActionResult Album( int id )
+        public ActionResult Album( int? id )
         {
-            var a = GetAlbumViewModel( id );
+            AlbumViewModel a = null;
+            if( id.HasValue ) a = GetAlbumViewModel( id.Value );
 
-            return View( a );
+            if( a == null )
+            {
+                return new HttpNotFoundResult();
+            }
+            else
+            {
+                ViewBag.MetaDescription = String.Join( ", ", a.Tracks.Select( t => t.SongName ) );
+                ViewBag.Title = a.AlbumName;
+                return View( a );
+            }
+        }
+
+        [HandleError()]
+        public ActionResult MiniPlayer( int albumId, int trackId )
+        {
+            var p = _musicReader.GetMiniPlayerFor( albumId, trackId );
+            if( p == null )
+            {
+                return new HttpNotFoundResult();
+            }
+            else
+            {
+                return Json( p );
+            }
         }
 
         private AlbumViewModel GetAlbumViewModel( int albumId )
