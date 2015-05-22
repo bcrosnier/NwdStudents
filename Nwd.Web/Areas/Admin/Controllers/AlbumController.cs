@@ -31,9 +31,13 @@ namespace Nwd.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create( Album album )
         {
-            var repo = new AlbumRepository();
-            repo.CreateAlbum( album, Server );
-            return new HttpStatusCodeResult( 200 );
+            if (ModelState.IsValid)
+            {
+                var repo = new AlbumRepository();
+                repo.CreateAlbum(album, Server);
+                return Redirect("Admin/Album/List");
+            }
+            return View( album );
         }
 
         public ActionResult GetTrackFormRow()

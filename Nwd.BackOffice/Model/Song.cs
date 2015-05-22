@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace Nwd.BackOffice.Model
 {
     using System;
@@ -20,8 +23,12 @@ namespace Nwd.BackOffice.Model
             this.Tracks = new HashSet<Track>();
         }
     
+        [HiddenInput]
         public int Id { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
         public Nullable<System.DateTime> Composed { get; set; }
     
         public virtual ICollection<Artist> Artists { get; set; }

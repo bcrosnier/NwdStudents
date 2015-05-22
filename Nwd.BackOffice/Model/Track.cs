@@ -20,9 +20,12 @@ namespace Nwd.BackOffice.Model
         [Key]
         [HiddenInput]
         public int AlbumId { get; set; }
+        [Required]
         public int Number { get; set; }
         public System.TimeSpan Duration { get; set; }
+        [HiddenInput]
         public string FileRelativePath { get; set; }
+        [HiddenInput]
         public Nullable<int> Song_Id { get; set; }
     
         public virtual Album Album { get; set; }

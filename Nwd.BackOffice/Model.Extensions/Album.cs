@@ -16,5 +16,9 @@ namespace Nwd.BackOffice.Model
         [Display( Name = "choucroute file")]
         [DataType(DataType.Upload)]
         public HttpPostedFileBase CoverFile { get; set; }
+
+        [Required]
+        [NotMapped]
+        public string ArtistName { get; set; }
     }
 }
