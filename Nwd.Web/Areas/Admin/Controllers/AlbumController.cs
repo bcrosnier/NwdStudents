@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Nwd.BackOffice.Impl;
 using Nwd.BackOffice.Model;
 
 namespace Nwd.Web.Areas.Admin.Controllers
@@ -18,19 +19,26 @@ namespace Nwd.Web.Areas.Admin.Controllers
 
         public ActionResult List()
         {
-            return View( new List<Album>());
+            return View( new List<Album>() );
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return View( new Album() );
         }
 
         [HttpPost]
         public ActionResult Create( Album album )
         {
-            return new HttpStatusCodeResult(200);
+            var repo = new AlbumRepository();
+            repo.CreateAlbum( album, Server );
+            return new HttpStatusCodeResult( 200 );
+        }
+
+        public ActionResult GetTrackFormRow()
+        {
+            return PartialView( "EditorTemplates/Track", new Track() { Song = new Song() { Name = "Couille" } } );
         }
     }
 }

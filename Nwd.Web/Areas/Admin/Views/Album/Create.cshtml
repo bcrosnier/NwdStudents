@@ -10,3 +10,15 @@ Coucou je suis le formulaire de création d'album
 {
     @Html.EditorForModel();
 }
+@section scripts {
+    <script>
+        $('#addTrack').on('click', function (event) {
+            $.ajax({
+                method: 'GET',
+                url: 'http://localhost:2774/Admin/Album/GetTrackFormRow'
+            }).done(function (data) {
+                $('.track-list-form').append('<li>' + data + '</li>');
+            });
+        });
+    </script>
+}

@@ -1,0 +1,55 @@
+﻿@using Nwd.BackOffice.Model
+@model Nwd.BackOffice.Model.Track
+@{
+    ViewBag.Guid = Guid.NewGuid().ToString();
+    ViewData.TemplateInfo.HtmlFieldPrefix = "Tracks[" + ViewBag.Guid + "]";
+}
+
+<div class="form-horizontal">
+    <h4>Track</h4>
+    <hr/>
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    <input type="hidden" name="Tracks.Index" autocomplete="off" value="@ViewBag.Guid" />
+    <div class="form-group">
+        @Html.LabelFor(model => model.AlbumId, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.AlbumId, new {htmlAttributes = new {@class = "form-control"}})
+            @*<input class="form-control text-box single-line" data-val="true" data-val-required="Le champ Name est requis." id="tracks_1ef088c3-9f2a-4c36-9c77-d941f8e9ee6d__Song_Name" name="Tracks[1ef088c3-9f2a-4c36-9c77-d941f8e9ee6d].AlbumId" value="" type="text">*@
+            @Html.ValidationMessageFor(model => model.AlbumId, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Number, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Number, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.Number, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Duration, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Duration, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.Duration, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FileRelativePath, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.FileRelativePath, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.FileRelativePath, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Song_Id, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Song_Id, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.Song_Id, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    @{ Html.RenderPartial("EditorTemplates/Song", Model.Song); }
+</div>

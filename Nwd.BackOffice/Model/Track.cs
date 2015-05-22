@@ -7,6 +7,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+
 namespace Nwd.BackOffice.Model
 {
     using System;
@@ -14,6 +17,8 @@ namespace Nwd.BackOffice.Model
     
     public partial class Track
     {
+        [Key]
+        [HiddenInput]
         public int AlbumId { get; set; }
         public int Number { get; set; }
         public System.TimeSpan Duration { get; set; }

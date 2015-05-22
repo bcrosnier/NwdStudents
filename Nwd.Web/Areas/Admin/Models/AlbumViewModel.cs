@@ -11,7 +11,7 @@ namespace Nwd.Web.Areas.Admin
     {
         public AlbumViewModel()
         {
-            this.Tracks = new HashSet<Track>();
+            Tracks = new HashSet<Track>();
         }
 
         [Required]
@@ -35,6 +35,6 @@ namespace Nwd.Web.Areas.Admin
         [Required]
         public string Artist { get; set; }
 
-        public virtual ICollection<Track> Tracks { get; set; }
+        public ICollection<Track> Tracks { get; set; }
     }
 }
